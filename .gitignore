@@ -1,0 +1,53 @@
+# IDE and Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python
+*.log
+*.pot
+*.pyc
+__pycache__/
+*/__pycache__/*
+**/__pycache__/**
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+system.log
+/staticfiles/
+/mediafiles/
+media/*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Project specific
+logic/
+diagrammes/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker-compose.override.yml
+
+# SSL Certificates (if any local certs)
+*.pem
+*.key
+*.crt

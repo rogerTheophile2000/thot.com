@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "core.middleware.RequestLoggingMiddleware",
 ]
 
 ROOT_URLCONF = 'thotApp.urls'
@@ -131,3 +132,67 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "standard": {
+            "format": "[%(asctime)s] %(levelname)s %(name)s -> %(message)s",
+        },
+    },
+
+
+    "handlers": {
+        # Console
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
+
+        # Fichier principal
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "system.log"),
+            "formatter": "standard",
+        },
+
+        # Fichier erreurs
+        "error": {
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "error.log"),
+            "level": "ERROR",
+            "formatter": "standard",
+        },
+    },
+
+    "loggers": {
+        # Logger global
+        "": {
+            "handlers": ["console", "file", "error"],
+            "level": "INFO",
+        },
+
+        # Requêtes Django
+        "django.request": {
+            "handlers": ["console", "file", "error"],
+            "level": "INFO",
+            "propagate": False,
+        },
+
+        # Server runserver
+        "django.server": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+
+
+
